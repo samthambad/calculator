@@ -27,10 +27,10 @@
                 <input  type= "button" value="0" onclick="buttonClick(0); globalVariable(0)">
             </div>
             <div class="operatorButtons">
-                <input  type= "button" value="+" onclick="buttonClick('+')">
-                <input  type= "button" value="-" onclick="buttonClick('-')">
-                <input  type= "button" value="x" onclick="buttonClick('x')">
-                <input  type= "button" value="÷" onclick="buttonClick('÷')">
+                <input  type= "button" value="+" onclick="buttonClick('+'); globalSymbol('+')">
+                <input  type= "button" value="-" onclick="buttonClick('-'); globalSymbol('-')">
+                <input  type= "button" value="x" onclick="buttonClick('x'); globalSymbol('x')">
+                <input  type= "button" value="÷" onclick="buttonClick('÷'); globalSymbol('÷')">
                 
             </div>
         </div>
@@ -39,7 +39,7 @@
             <button>=</button>
         </div>
         <div class="clearButton">
-            <button>clear</button>
+            <input  type= "button" value="clear" onclick="c">
         </div>
     </div>
 </body>

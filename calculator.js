@@ -20,12 +20,6 @@ function operate(a,operator,b){//remember to keep operator in string
     if (operator === '+'){
         return add(a,b) //return is needed as return cannot pass through 2 functions
     }
-if (numA = undefined){
-	let numA = num
-}
-else {
-	let numB = num
-}
     else if(operator === '-'){
         return subtract(a,b)
     }
@@ -36,8 +30,8 @@ else {
         return divide(a,b)
     }
 }
-}
 
+let numEntered//is this a global variable
 
 //functions run when number buttons are clicked.
 
@@ -53,13 +47,20 @@ function buttonClick(num){
     
 }
 //puts the numbers clicked into a globalVariable to be used later
+let numA
+let numB
 function globalVariable(num) {
-    let numA
-    let numB
-    if (numA = undefined){
+    
+    if (numA == undefined){
         numA = num
     }
     else {
         numB = num
     }
+    console.log(`The first number is ${numA} and second number is ${numB}`)
+}
+
+function globalSymbol(sym){
+    let globalOperator = sym
+    console.log(`The operator is ${globalOperator}`)
 }
