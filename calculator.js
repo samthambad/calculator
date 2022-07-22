@@ -36,7 +36,7 @@ else {
         return divide(a,b)
     }
 }
-}
+
 
 
 //functions run when number buttons are clicked.
