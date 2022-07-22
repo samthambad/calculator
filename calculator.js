@@ -19,8 +19,8 @@ function operate(a,operator,b){//remember to keep operator in string
     console.log(operator)
     if (operator === '+'){
         return add(a,b) //return is needed as return cannot pass through 2 functions
-    }inputNumber(num) {
-if numA = undefined{
+    }
+if (numA = undefined){
 	let numA = num
 }
 else {
