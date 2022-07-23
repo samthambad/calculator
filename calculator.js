@@ -1,37 +1,6 @@
-function add(a,b){
-    return a+b
-}
 
-function subtract(a,b){
-    return a-b
-}
 
-function multiply(a,b){
-    return a*b
-}
-
-function divide(a,b){
-    return a/b
-}
-
-function operate(a,operator,b){//remember to keep operator in string
-    operator = operator.toString()
-    console.log(operator)
-    if (operator === '+'){
-        return add(a,b) //return is needed as return cannot pass through 2 functions
-    }
-    else if(operator === '-'){
-        return subtract(a,b)
-    }
-    else if(operator === '*'){
-        return multiply(a,b)
-    }
-    else if(operator === '/'){
-        return divide(a,b)
-    }
-}
-
-let numEntered//is this a global variable
+let numEntered
 
 //functions run when number buttons are clicked.
 
@@ -80,4 +49,44 @@ function clearGlobalValues(){
     numB = undefined
     globalOperator = undefined
     console.log(`After pressing 'clear' button, the first number is ${numA} and second number is ${numB}, and operator is ${globalOperator}`)
+}
+
+//math
+
+function add(a,b){
+    return a+b
+}
+
+function subtract(a,b){
+    return a-b
+}
+
+function multiply(a,b){
+    return a*b
+}
+
+function divide(a,b){
+    return a/b
+}
+
+function operate(a,operator,b){//remember to keep operator in string
+    a = numA
+    b = numB
+    console.log(a)
+    console.log(b)
+    operator = globalOperator
+    operator = operator.toString()
+    console.log(operator)
+    if (operator === '+'){
+        return add(a,b) //return is needed as return cannot pass through 2 functions
+    }
+    else if(operator === '-'){
+        return subtract(a,b)
+    }
+    else if(operator === '*'){
+        return multiply(a,b)
+    }
+    else if(operator === '/'){
+        return divide(a,b)
+    }
 }
