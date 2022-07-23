@@ -8,5 +8,7 @@ body{
     display: flex;
     background-color: rgb(169, 169, 169);
     justify-content: end;
-    
+    min-height: 50px;
+    min-width: 500px;
+    margin-bottom: 50px;
 }

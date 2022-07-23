@@ -39,13 +39,20 @@ let numEntered//is this a global variable
 
 
 function buttonClick(num){
-    const display1 = document.querySelector('.display')
+    let display1 = document.querySelector('.display')
     const numEntered = document.createElement('span')
     numEntered.textContent = num
     display1.appendChild(numEntered);
-    console.log(numEntered)
-    
+ 
 }
+
+let calcDisplay = document.querySelector('.display')
+function clearDisplay(){
+    while (calcDisplay.firstElementChild){
+        calcDisplay.firstElementChild.remove();
+    }
+}
+
 //puts the numbers clicked into a globalVariable to be used later
 let numA
 let numB
@@ -60,7 +67,17 @@ function globalVariable(num) {
     console.log(`The first number is ${numA} and second number is ${numB}`)
 }
 
+let globalOperator
 function globalSymbol(sym){
-    let globalOperator = sym
+    globalOperator = sym
     console.log(`The operator is ${globalOperator}`)
+}
+
+
+//use clear button to remove the global variable values
+function clearGlobalValues(){
+    numA = undefined 
+    numB = undefined
+    globalOperator = undefined
+    console.log(`After pressing 'clear' button, the first number is ${numA} and second number is ${numB}, and operator is ${globalOperator}`)
 }

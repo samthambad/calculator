@@ -9,8 +9,9 @@
     <script src="calculator.js" defer></script>
 </head>
 <body>
+    <h3>Only works with single digit.</h3>
     <div class="display">
-        123
+        
     </div>
     <div class="buttons">
         <div class="inputButtons">
@@ -39,7 +40,7 @@
             <button>=</button>
         </div>
         <div class="clearButton">
-            <input  type= "button" value="clear" onclick="c">
+            <input  type= "button" value="clear" onclick="clearDisplay();  clearGlobalValues()">
         </div>
     </div>
 </body>
