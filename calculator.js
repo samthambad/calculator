@@ -5,7 +5,7 @@ let numEntered
 //functions run when number buttons are clicked.
 
 
-hello
+
 
 function buttonClick(num){
     let display1 = document.querySelector('.display')
