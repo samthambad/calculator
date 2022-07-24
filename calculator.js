@@ -1,5 +1,4 @@
-
-
+let pushToSecondNum = false//initially, the indiv numbers only go to first number
 let numEntered
 
 //functions run when number buttons are clicked.
@@ -27,11 +26,27 @@ let numA
 let numB
 function globalVariable(num) {
     
-    if (numA == undefined){
-        numA = num
+    if (pushToSecondNum == false){
+        if (numA == undefined ){//if empty, let numA be num otherwise append it, for >1 digit numbers
+            numA = num
+        }
+        else{
+            num = num.toString()//convert to string to append 
+            numA += num
+            numA = parseInt(numA)//convert to number
+            console.log(typeof(numA))
+        }
     }
     else {
-        numB = num
+        if (numB == undefined ){
+            numB = num
+        }
+        else{
+            num = num.toString()
+            numB += num
+            numB = parseInt(numB)
+            console.log(typeof(numB))
+        }
     }
     console.log(`The first number is ${numA} and second number is ${numB}`)
 }
@@ -90,3 +105,11 @@ function operate(a,operator,b){//remember to keep operator in string
         return divide(a,b)
     }
 }
+
+
+let operatorButtons = document.querySelector(".buttons .inputButtons .operatorButtons")
+console.log(operatorButtons)
+operatorButtons.addEventListener('click', function secondNumber(){
+    pushToSecondNum = true
+    console.log(pushToSecondNum)
+} )
