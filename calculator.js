@@ -14,11 +14,12 @@ function buttonClick(num){
  
 }
 
+
+
 let calcDisplay = document.querySelector('.display')
 function clearDisplay(){
-    while (calcDisplay.firstElementChild){
-        calcDisplay.firstElementChild.remove();
-    }
+    calcDisplay.textContent = ""
+    
 }
 
 //puts the numbers clicked into a globalVariable to be used later
@@ -34,7 +35,7 @@ function globalVariable(num) {
             num = num.toString()//convert to string to append 
             numA += num
             numA = parseInt(numA)//convert to number
-            console.log(typeof(numA))
+
         }
     }
     else {
@@ -49,6 +50,7 @@ function globalVariable(num) {
         }
     }
     console.log(`The first number is ${numA} and second number is ${numB}`)
+pushToSecondNum =false
 }
 
 let globalOperator
@@ -62,6 +64,7 @@ function globalSymbol(sym){
 function clearGlobalValues(){
     numA = undefined 
     numB = undefined
+    ans = undefined
     globalOperator = undefined
     console.log(`After pressing 'clear' button, the first number is ${numA} and second number is ${numB}, and operator is ${globalOperator}`)
 }
@@ -87,19 +90,17 @@ function divide(a,b){
 function operate(a,operator,b){//remember to keep operator in string
     a = numA
     b = numB
-    console.log(a)
-    console.log(b)
     operator = globalOperator
     operator = operator.toString()
-    console.log(operator)
+
     if (operator === '+'){
-        return add(a,b) //return is needed as return cannot pass through 2 functions
+        return(add(a,b)) //return is needed as return cannot pass through 2 functions
     }
     else if(operator === '-'){
-        return subtract(a,b)
+        return(subtract(a,b))
     }
-    else if(operator === '*'){
-        return multiply(a,b)
+    else if(operator === 'x'){
+        return(multiply(a,b))
     }
     else if(operator === '/'){
         return divide(a,b)
@@ -111,5 +112,16 @@ let operatorButtons = document.querySelector(".buttons .inputButtons .operatorBu
 console.log(operatorButtons)
 operatorButtons.addEventListener('click', function secondNumber(){
     pushToSecondNum = true
-    console.log(pushToSecondNum)
 } )
+
+
+
+//putting the answer on the display
+let equalButton = document.querySelector(".equalButton")
+equalButton.addEventListener('click',function resultOnDisplay(){
+    let display2 = document.querySelector('.display')
+    let ans = document.createElement('div')
+    ans.textContent = operate(numA, globalOperator, numB)
+    display2.append(" = ")
+    display2.appendChild(ans)
+})

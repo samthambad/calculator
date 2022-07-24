@@ -12,3 +12,7 @@ body{
     min-width: 500px;
     margin-bottom: 50px;
 }
+
+.buttons {
+    text-align: center;
+}
