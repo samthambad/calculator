@@ -50,7 +50,7 @@ function globalVariable(num) {
         }
     }
     console.log(`The first number is ${numA} and second number is ${numB}`)
-pushToSecondNum =false
+pushToSecondNum =false //reset the whether number pressed goes to 1st or 2nd num
 }
 
 let globalOperator
@@ -120,8 +120,9 @@ operatorButtons.addEventListener('click', function secondNumber(){
 let equalButton = document.querySelector(".equalButton")
 equalButton.addEventListener('click',function resultOnDisplay(){
     let display2 = document.querySelector('.display')
-    let ans = document.createElement('div')
-    ans.textContent = operate(numA, globalOperator, numB)
-    display2.append(" = ")
-    display2.appendChild(ans)
+    let ans = operate(numA, globalOperator, numB)
+    display2.textContent = ans
 })
+
+
+//print when 2nd operator is clicked
