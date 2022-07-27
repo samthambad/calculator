@@ -114,6 +114,7 @@ console.log(operatorButtons)
 let counter = 0
 operatorButtons.addEventListener('click', function secondNumber(){
     counter++
+    console.log('the counter is', counter, 'just after clicking the operator')
     pushToSecondNum = true
     if (counter ==2){//how to make this trigger for every odd num
         console.log('the counter is', counter)
