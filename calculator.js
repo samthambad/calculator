@@ -11,7 +11,7 @@ function buttonClick(num){
     const numEntered = document.createElement('span')
     numEntered.textContent = num
     display1.appendChild(numEntered);
- 
+        console.log('a num/symbol has been appended')
 }
 
 
@@ -19,7 +19,8 @@ function buttonClick(num){
 let calcDisplay = document.querySelector('.display')
 function clearDisplay(){
     calcDisplay.textContent = ""
-    
+    pushToSecondNum =false
+    counter = 0
 }
 
 //puts the numbers clicked into a globalVariable to be used later
@@ -110,9 +111,21 @@ function operate(a,operator,b){//remember to keep operator in string
 
 let operatorButtons = document.querySelector(".buttons .inputButtons .operatorButtons")
 console.log(operatorButtons)
+let counter = 0
 operatorButtons.addEventListener('click', function secondNumber(){
+    counter++
     pushToSecondNum = true
-} )
+    if (counter ==2){//how to make this trigger for every odd num
+        console.log('the counter is', counter)
+        resultOnDisplay();
+        numA = ans;
+        numB = undefined
+        console.log(ans)
+        counter = 0
+    }
+
+//     operatorButtons.addEventListener('click', resultOnDisplay());//when operator is clicked the second time
+})
 
 
 
@@ -124,5 +137,11 @@ equalButton.addEventListener('click',function resultOnDisplay(){
     display2.textContent = ans
 })
 
-
+let ans
 //print when 2nd operator is clicked
+function resultOnDisplay(){
+    let display2 = document.querySelector('.display')
+    ans = operate(numA, globalOperator, numB)
+    console.log(numA, globalOperator, numB)
+    display2.textContent = ans
+}
