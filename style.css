@@ -14,5 +14,22 @@ body{
 }
 
 .buttons {
+    text-align: center;    
+}
+
+.numberButtons {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     text-align: center;
+    background-color: ;
+}
+
+.zeroButton {
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+}
+
+.operatorButtons:focus {
+    outline: aquamarine;
 }

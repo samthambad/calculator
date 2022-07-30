@@ -10,8 +10,8 @@ function buttonClick(num){
     let display1 = document.querySelector('.display')
     const numEntered = document.createElement('span')
     numEntered.textContent = num
-    display1.appendChild(numEntered);
-        console.log('a num/symbol has been appended')
+    display1.textContent = num;
+        console.log('a num/symbol has been textContented')
 }
 
 
@@ -50,8 +50,8 @@ function globalVariable(num) {
             console.log(typeof(numB))
         }
     }
-    console.log(`The first number is ${numA} and second number is ${numB}`)
-pushToSecondNum =false //reset the whether number pressed goes to 1st or 2nd num
+    console.log(`The first number is ${numA} and second number is ${numB} and the operator is ${globalOperator}`)
+ //reset the whether number pressed goes to 1st or 2nd num
 }
 
 let globalOperator
@@ -110,27 +110,30 @@ function operate(a,operator,b){//remember to keep operator in string
 
 
 let operatorButtons = document.querySelector(".buttons .inputButtons .operatorButtons")
-console.log(operatorButtons)
-let counter = 0
-operatorButtons.addEventListener('click', function secondNumber(){
-    counter++
-    console.log('the counter is', counter, 'just after clicking the operator')
-    pushToSecondNum = true
-    if (counter ==2){//how to make this trigger for every odd num
-        console.log('the counter is', counter)
-        resultOnDisplay();
-        numA = ans;
-        numB = undefined
-        console.log(ans)
-        counter = 0
-    }
 
-//     operatorButtons.addEventListener('click', resultOnDisplay());//when operator is clicked the second time
+operatorButtons.addEventListener('click', function operatorPressing(sign){  
+let operatorClicked =sign.target.value
+  buttonClick(operatorClicked)  
+    if (numB== undefined){
+            globalOperator = sign.target.value
+            pushToSecondNum =true
+        
+        }
+        else if((numA!=undefined && numB!=undefined && globalOperator!=undefined)){
+        resultOnDisplay();//using the previous operator
+        console.log(sign.target.value)
+        
+        let newOperator = sign.target.value
+        globalOperator = newOperator
+        numA = ans
+        numB = undefined
+        }
+        
 })
 
 
 
-//putting the answer on the display
+//putting the answer on the display using equal button
 let equalButton = document.querySelector(".equalButton")
 equalButton.addEventListener('click',function resultOnDisplay(){
     let display2 = document.querySelector('.display')
@@ -144,5 +147,12 @@ function resultOnDisplay(){
     let display2 = document.querySelector('.display')
     ans = operate(numA, globalOperator, numB)
     console.log(numA, globalOperator, numB)
+    display2.textContent =  ans
+}
+
+function resultOnDisplay2(){
+    let display2 = document.querySelector('.display')
+    ans = operate(numA, newOperator, numB)
+    console.log(numA, newOperator, numB)
     display2.textContent = ans
 }
