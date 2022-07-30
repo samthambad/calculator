@@ -9,7 +9,7 @@ body{
     background-color: rgb(169, 169, 169);
     justify-content: end;
     min-height: 50px;
-    min-width: 500px;
+    min-width: 300px;
     margin-bottom: 50px;
 }
 
@@ -20,8 +20,8 @@ body{
 .numberButtons {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    text-align: center;
-    background-color: ;
+    
+
 }
 
 .zeroButton {
@@ -32,4 +32,8 @@ body{
 
 .operatorButtons:focus {
     outline: aquamarine;
+}
+
+input {
+    background-color: bisque;
 }
