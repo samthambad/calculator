@@ -1,30 +1,24 @@
-let pushToSecondNum = false//initially, the indiv numbers only go to first number
-let numEntered
-
+let pushToSecondNum = false;//initially, the indiv numbers only go to first number
+let numEntered;
 //functions run when number buttons are clicked.
+//create and array and push every number/operator. Run once = is present
+let sessionArray = [];
 
 
-
-
-function buttonClick(num){
-    let display1 = document.querySelector('.display')
-    const numEntered = document.createElement('span')
-    numEntered.textContent = num
-    display1.textContent = num;
-        console.log('a num/symbol has been textContented')
-}
-
-
+// create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
+[...document.querySelectorAll('input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
+{sessionArray.push(e.target.value) 
+    console.log(sessionArray)})});
 
 let calcDisplay = document.querySelector('.display')
 function clearDisplay(){
     calcDisplay.textContent = ""
     pushToSecondNum =false
-    counter = 0
+    let counter = 0
 }
 
 //puts the numbers clicked into a globalVariable to be used later
-let numA
+/* let numA
 let numB
 function globalVariable(num) {
     
@@ -58,17 +52,17 @@ let globalOperator
 function globalSymbol(sym){
     globalOperator = sym
     console.log(`The operator is ${globalOperator}`)
-}
+} */
 
 
 //use clear button to remove the global variable values
-function clearGlobalValues(){
+/* function clearGlobalValues(){
     numA = undefined 
     numB = undefined
     ans = undefined
     globalOperator = undefined
     console.log(`After pressing 'clear' button, the first number is ${numA} and second number is ${numB}, and operator is ${globalOperator}`)
-}
+} */
 
 //math
 
@@ -107,31 +101,6 @@ function operate(a,operator,b){//remember to keep operator in string
         return divide(a,b)
     }
 }
-
-
-let operatorButtons = document.querySelector(".buttons .inputButtons .operatorButtons")
-
-operatorButtons.addEventListener('click', function operatorPressing(sign){  
-let operatorClicked =sign.target.value
-  buttonClick(operatorClicked)  
-    if (numB== undefined){
-            globalOperator = sign.target.value
-            pushToSecondNum =true
-        
-        }
-        else if((numA!=undefined && numB!=undefined && globalOperator!=undefined)){
-        resultOnDisplay();//using the previous operator
-        console.log(sign.target.value)
-        
-        let newOperator = sign.target.value
-        globalOperator = newOperator
-        numA = ans
-        numB = undefined
-        }
-        
-})
-
-
 
 //putting the answer on the display using equal button
 let equalButton = document.querySelector(".equalButton")
