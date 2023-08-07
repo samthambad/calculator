@@ -5,17 +5,30 @@ let numEntered;
 let sessionArray = [];
 
 
+let calcDisplay = document.querySelector('.display');
 // create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
 [...document.querySelectorAll('input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
-{sessionArray.push(e.target.value) 
-    console.log(sessionArray)})});
+    {sessionArray.push(e.target.value);
+    calcDisplay.textContent = sessionArray.join("");})});
+    
+document.querySelector(".clearButton input[type='button']").addEventListener("click", function(){
+    sessionArray = []
+    calcDisplay.textContent = sessionArray.join("");
+});
 
-let calcDisplay = document.querySelector('.display')
-function clearDisplay(){
-    calcDisplay.textContent = ""
-    pushToSecondNum =false
-    let counter = 0
-}
+//equalButton takes the array, join the array and seperate based on whatever is not number
+document.querySelector(".equalButton input[type='button']").addEventListener("click", function(){
+        console.log(sessionArray);
+        //find the indices of the operators and using that concat the digits before that and after that
+        //complete the calc according to BODMAS: if there is any of this ['*','/'], do first, otherwise L->R
+        let operatorIndexes=[];
+        for(let i =0; i<sessionArray.length; i++){
+            if (isNaN(parseInt(sessionArray[i]))){
+                operatorIndexes.push(i);
+            }
+        }
+        console.log("Operator indices"+operatorIndexes);
+})
 
 //puts the numbers clicked into a globalVariable to be used later
 /* let numA
@@ -66,7 +79,7 @@ function globalSymbol(sym){
 
 //math
 
-function add(a,b){
+/* function add(a,b){
     return a+b
 }
 
@@ -81,8 +94,8 @@ function multiply(a,b){
 function divide(a,b){
     return a/b
 }
-
-function operate(a,operator,b){//remember to keep operator in string
+ */
+/* function operate(a,operator,b){//remember to keep operator in string
     a = numA
     b = numB
     operator = globalOperator
@@ -100,17 +113,16 @@ function operate(a,operator,b){//remember to keep operator in string
     else if(operator === '/'){
         return divide(a,b)
     }
-}
+} */
 
 //putting the answer on the display using equal button
-let equalButton = document.querySelector(".equalButton")
+/* let equalButton = document.querySelector(".equalButton")
 equalButton.addEventListener('click',function resultOnDisplay(){
     let display2 = document.querySelector('.display')
     let ans = operate(numA, globalOperator, numB)
     display2.textContent = ans
-})
-
-let ans
+}) */
+/* let ans;
 //print when 2nd operator is clicked
 function resultOnDisplay(){
     let display2 = document.querySelector('.display')
@@ -124,4 +136,4 @@ function resultOnDisplay2(){
     ans = operate(numA, newOperator, numB)
     console.log(numA, newOperator, numB)
     display2.textContent = ans
-}
+} */
