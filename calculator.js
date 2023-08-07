@@ -21,13 +21,46 @@ document.querySelector(".equalButton input[type='button']").addEventListener("cl
         console.log(sessionArray);
         //find the indices of the operators and using that concat the digits before that and after that
         //complete the calc according to BODMAS: if there is any of this ['*','/'], do first, otherwise L->R
-        let operatorIndexes=[];
+        let operatorIndices=[];
         for(let i =0; i<sessionArray.length; i++){
             if (isNaN(parseInt(sessionArray[i]))){
-                operatorIndexes.push(i);
+                operatorIndices.push(i);
             }
         }
-        console.log("Operator indices"+operatorIndexes);
+        //remove the last index which is '='
+        operatorIndices.pop();
+        //join all the digits before the operator
+        let firstNum = sessionArray.slice(0,operatorIndices[0]);
+        let firstNumString = firstNum.join("");
+        let numTogetherArrays= [firstNumString];
+        console.log(firstNumString)
+        //add all the subsequent numbers to array
+        for(let i =0; i<operatorIndices.length;i++){
+            let ithNum = sessionArray.slice(operatorIndices[i]+1,operatorIndices[i+1]);
+            let ithNumString = ithNum.join("");
+            numTogetherArrays.push(ithNumString);
+        }
+        //now use 2 numbers per one operator
+        let accumulator = 0;
+        for(let i =0;i<numTogetherArrays.length-1;i++){
+            for(index in operatorIndices){
+                if (sessionArray[index] == '+'){
+                    accumulator = parseInt(numTogetherArrays[i]) + parseInt(numTogetherArrays(i+1));
+                }
+                else if(sessionArray[index] == 'x'){
+                    accumulator = parseInt(numTogetherArrays[i]) * parseInt(numTogetherArrays(i+1));
+                }
+                else if(sessionArray[index] == '-'){
+
+                }
+                else if(sessionArray[index] == '÷'){
+
+                }
+                parseInt(numTogetherArrays[i])
+            }
+        }
+        console.log("Operator indices"+operatorIndices);
+        console.log(numTogetherArrays);
 })
 
 //puts the numbers clicked into a globalVariable to be used later
