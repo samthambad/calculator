@@ -45,10 +45,10 @@ document.querySelector(".equalButton input[type='button']").addEventListener("cl
         for(let i =0;i<numTogetherArrays.length-1;i++){
             for(index in operatorIndices){
                 if (sessionArray[index] == '+'){
-                    accumulator = parseInt(numTogetherArrays[i]) + parseInt(numTogetherArrays(i+1));
+                    accumulator += parseInt(numTogetherArrays[i]) + parseInt(numTogetherArrays(i+1));
                 }
                 else if(sessionArray[index] == 'x'){
-                    accumulator = parseInt(numTogetherArrays[i]) * parseInt(numTogetherArrays(i+1));
+                    accumulator += parseInt(numTogetherArrays[i]) * parseInt(numTogetherArrays(i+1));
                 }
                 else if(sessionArray[index] == '-'){
 
