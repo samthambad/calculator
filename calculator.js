@@ -8,25 +8,31 @@ let displayArray = [];
 
 
 let calcDisplay = document.querySelector('.display');
-[...document.querySelectorAll('.operatorButtons button')].forEach(function(item){item.addEventListener('click', e => 
-    {
-        let stringToBeAdded = calcDisplay.textContent;
-        // find non number's index
-        let indexOfOpr = 0;
-        while (indexOfOpr+1 < stringToBeAdded.length){
-            indexOfOpr = stringToBeAdded.search(/\D/);
-            stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
-            console.log(stringToBeAdded);
-        }
-        numArray.push(calcDisplay.textContent);
-        
-    })});
-    
-    // create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
-[...document.querySelectorAll('input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
-    {displayArray.push(e.target.value);
-    calcDisplay.textContent = displayArray.join("");})});
 
+// create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
+[...document.querySelectorAll('input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
+{displayArray.push(e.target.value);
+    calcDisplay.textContent = displayArray.join("");})});
+    
+    [...document.querySelectorAll('.operatorButtons input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
+        {
+            let stringToBeAdded = calcDisplay.textContent;
+            // find non number's index
+            let indexOfOpr = 0;
+            while (indexOfOpr+1 < stringToBeAdded.length){
+                indexOfOpr = stringToBeAdded.search(/\D/);
+                if (indexOfOpr+1 == stringToBeAdded.length){
+                    //if at the last opr then only take what is before the operator
+                    stringToBeAdded = stringToBeAdded.slice(0,-1);
+                    break};
+                stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
+                stringToBeAdded = stringToBeAdded.slice(0,-1);
+            } 
+            console.log(stringToBeAdded);
+            numArray.push(stringToBeAdded);
+            numArray.push(calcDisplay.textContent);
+            
+        })});
     
 document.querySelector(".clearButton input[type='button']").addEventListener("click", function(){
     numArray = []
