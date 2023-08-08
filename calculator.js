@@ -2,59 +2,77 @@ let pushToSecondNum = false;//initially, the indiv numbers only go to first numb
 let numEntered;
 //functions run when number buttons are clicked.
 //create and array and push every number/operator. Run once = is present
-let sessionArray = [];
+let numArray = [];
+let oprArray = [];
+let displayArray = [];
 
 
 let calcDisplay = document.querySelector('.display');
-// create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
+[...document.querySelectorAll('.operatorButtons button')].forEach(function(item){item.addEventListener('click', e => 
+    {
+        let stringToBeAdded = calcDisplay.textContent;
+        // find non number's index
+        let indexOfOpr = 0;
+        while (indexOfOpr+1 < stringToBeAdded.length){
+            indexOfOpr = stringToBeAdded.search(/\D/);
+            stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
+            console.log(stringToBeAdded);
+        }
+        numArray.push(calcDisplay.textContent);
+        
+    })});
+    
+    // create a collection of all input of type button, use spread to make it an array and then use forEach to addEventListener then push each value to array
 [...document.querySelectorAll('input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
-    {sessionArray.push(e.target.value);
-    calcDisplay.textContent = sessionArray.join("");})});
+    {displayArray.push(e.target.value);
+    calcDisplay.textContent = displayArray.join("");})});
+
     
 document.querySelector(".clearButton input[type='button']").addEventListener("click", function(){
-    sessionArray = []
-    calcDisplay.textContent = sessionArray.join("");
+    numArray = []
+    calcDisplay.textContent = numArray.join("");
 });
 
 //equalButton takes the array, join the array and seperate based on whatever is not number
 document.querySelector(".equalButton input[type='button']").addEventListener("click", function(){
-        console.log(sessionArray);
+        console.log(numArray);
         //find the indices of the operators and using that concat the digits before that and after that
         //complete the calc according to BODMAS: if there is any of this ['*','/'], do first, otherwise L->R
         let operatorIndices=[];
-        for(let i =0; i<sessionArray.length; i++){
-            if (isNaN(parseInt(sessionArray[i]))){
+        for(let i =0; i<numArray.length; i++){
+            if (isNaN(parseInt(numArray[i]))){
                 operatorIndices.push(i);
             }
         }
         //remove the last index which is '='
         operatorIndices.pop();
         //join all the digits before the operator
-        let firstNum = sessionArray.slice(0,operatorIndices[0]);
+        let firstNum = numArray.slice(0,operatorIndices[0]);
         let firstNumString = firstNum.join("");
         let numTogetherArrays= [firstNumString];
         console.log(firstNumString)
         //add all the subsequent numbers to array
         for(let i =0; i<operatorIndices.length;i++){
-            let ithNum = sessionArray.slice(operatorIndices[i]+1,operatorIndices[i+1]);
+            let ithNum = numArray.slice(operatorIndices[i]+1,operatorIndices[i+1]);
             let ithNumString = ithNum.join("");
             numTogetherArrays.push(ithNumString);
         }
-        //now use 2 numbers per one operator
+        // the alg is to take 2 num and 1 operator perform calc and add
+        //how to do BODMAS?
         let accumulator = 0;
         for(let i =0;i<numTogetherArrays.length-1;i++){
             for(index in operatorIndices){
-                if (sessionArray[index] == '+'){
+                if (numArray[index] == '+'){
                     accumulator += parseInt(numTogetherArrays[i]) + parseInt(numTogetherArrays(i+1));
                 }
-                else if(sessionArray[index] == 'x'){
+                else if(numArray[index] == 'x'){
                     accumulator += parseInt(numTogetherArrays[i]) * parseInt(numTogetherArrays(i+1));
                 }
-                else if(sessionArray[index] == '-'){
-
+                else if(numArray[index] == '-'){
+                    accumulator += parseInt(numTogetherArrays[i]) - parseInt(numTogetherArrays(i+1));
                 }
-                else if(sessionArray[index] == '÷'){
-
+                else if(numArray[index] == '÷'){
+                    accumulator += parseInt(numTogetherArrays[i]) / parseInt(numTogetherArrays(i+1));
                 }
                 parseInt(numTogetherArrays[i])
             }
