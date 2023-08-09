@@ -17,7 +17,6 @@ let calcDisplay = document.querySelector('.display');
     
     [...document.querySelectorAll('.operatorButtons, .equalButton')].forEach(function(item){item.addEventListener('click', e => 
         {
-            oprArray.push(e.target.value);
             console.log("operator/= button used");
             let finalCalcString = calcDisplay.textContent;
             console.log(finalCalcString);
@@ -39,7 +38,6 @@ let calcDisplay = document.querySelector('.display');
             console.log(stringToBeAdded);
             numArray.push(stringToBeAdded);
             console.log(numArray);
-            console.log(oprArray);
         })});
     
 document.querySelector(".clearButton").addEventListener("click", function(){
