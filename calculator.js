@@ -5,6 +5,7 @@ let numEntered;
 let numArray = [];
 let oprArray = [];
 let displayArray = [];
+const bodmasArray = ['÷','x','+','-']
 
 
 let calcDisplay = document.querySelector('.display');
@@ -14,7 +15,7 @@ let calcDisplay = document.querySelector('.display');
 {displayArray.push(e.target.value);
     calcDisplay.textContent = displayArray.join("");})});
     
-    [...document.querySelectorAll('.operatorButtons input[type="button"]')].forEach(function(item){item.addEventListener('click', e => 
+    [...document.querySelectorAll('.operatorButtons, .equalButton')].forEach(function(item){item.addEventListener('click', e => 
         {
             let stringToBeAdded = calcDisplay.textContent;
             // find non number's index
@@ -30,44 +31,19 @@ let calcDisplay = document.querySelector('.display');
             } 
             console.log(stringToBeAdded);
             numArray.push(stringToBeAdded);
-            numArray.push(calcDisplay.textContent);
-            
         })});
     
-document.querySelector(".clearButton input[type='button']").addEventListener("click", function(){
+document.querySelector(".clearButton").addEventListener("click", function(){
     numArray = []
     calcDisplay.textContent = numArray.join("");
 });
 
-//equalButton takes the array, join the array and seperate based on whatever is not number
-document.querySelector(".equalButton input[type='button']").addEventListener("click", function(){
-        console.log(numArray);
-        //find the indices of the operators and using that concat the digits before that and after that
-        //complete the calc according to BODMAS: if there is any of this ['*','/'], do first, otherwise L->R
-        let operatorIndices=[];
-        for(let i =0; i<numArray.length; i++){
-            if (isNaN(parseInt(numArray[i]))){
-                operatorIndices.push(i);
-            }
-        }
-        //remove the last index which is '='
-        operatorIndices.pop();
-        //join all the digits before the operator
-        let firstNum = numArray.slice(0,operatorIndices[0]);
-        let firstNumString = firstNum.join("");
-        let numTogetherArrays= [firstNumString];
-        console.log(firstNumString)
-        //add all the subsequent numbers to array
-        for(let i =0; i<operatorIndices.length;i++){
-            let ithNum = numArray.slice(operatorIndices[i]+1,operatorIndices[i+1]);
-            let ithNumString = ithNum.join("");
-            numTogetherArrays.push(ithNumString);
-        }
-        // the alg is to take 2 num and 1 operator perform calc and add
-        //how to do BODMAS?
+document.querySelector(".equalButton").addEventListener("click", function(){
+        // equalButton takes the oprArray and numArray and matches them to multiply
+        //TO FOLLOW BODMAS, use the oprArray and find '/' then get that done, and then do the others...
         let accumulator = 0;
         for(let i =0;i<numTogetherArrays.length-1;i++){
-            for(index in operatorIndices){
+            for( let index in operatorIndices){
                 if (numArray[index] == '+'){
                     accumulator += parseInt(numTogetherArrays[i]) + parseInt(numTogetherArrays(i+1));
                 }
