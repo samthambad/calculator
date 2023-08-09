@@ -1,5 +1,6 @@
 let pushToSecondNum = false;//initially, the indiv numbers only go to first number
 let numEntered;
+let accumulator = 0;
 //functions run when number buttons are clicked.
 //create and array and push every number/operator. Run once = is present
 let numArray = [];
@@ -26,7 +27,6 @@ let calcDisplay = document.querySelector('.display');
             let stringToBeAdded;
             while (indexOfOpr+1 < finalCalcString.length){
                 indexOfOpr = finalCalcString.search(/\D/);
-                console.log("indx of opr"+indexOfOpr);
                 if (indexOfOpr+1 == finalCalcString.length){
                     console.log("opr+1 = finalcalcstring.length");
                     //if at the last opr then only take what is before the operator
@@ -49,8 +49,47 @@ document.querySelector(".clearButton").addEventListener("click", function(){
 
 document.querySelector(".equalButton").addEventListener("click", function(){
         // equalButton takes the oprArray and numArray and matches them to multiply
+        if(oprArray.slice(-1) == "="){
+            oprArray.pop();
+            console.log(oprArray);
+        }
         //TO FOLLOW BODMAS, use the oprArray and find '/' then get that done, and then do the others...
+        for(let sign in bodmasArray){
+            // sign must be in oprArray
+            if (oprArray.includes(bodmasArray[sign])){
+                // get the index of that item
+                let oprIndex = oprArray.indexOf(bodmasArray[sign]);
+                // apply this opr on index = oprIndex*2 and oprIndex*2+1
+                let numIndexArray = [oprIndex, oprIndex+1];
+                console.log(numIndexArray);
+                let numToBeCalc = [];
+                for (let index in numIndexArray){
 
+                    // carry out the calc here
+                    numToBeCalc.push(numArray[numIndexArray[index]]);
+                    console.log("numtobecalc: "+numToBeCalc);
+                    console.log("sign: "+sign);
+                }
+                /* *PROBLEM BELOW, due to overlapping numbers for different calcs, 
+                same num is used for 2 diff calc when should only be used for 1
+                have to change  */
+                if (bodmasArray[sign] == "*"){
+                    accumulator += numToBeCalc[0] * numToBeCalc[1];
+                    
+                }
+                else if (bodmasArray[sign] == "÷"){
+                    accumulator += numToBeCalc[0] / numToBeCalc[1];
+                }
+                else if (bodmasArray[sign] == "+"){
+                    accumulator += numToBeCalc[0] + numToBeCalc[1];
+                }
+                else if (bodmasArray[sign] == "-"){
+                    accumulator += numToBeCalc[0] - numToBeCalc[1];
+                }
+                console.log(accumulator);
+            }
+        }
+    })
         // let accumulator = 0;
         // for(let i =0;i<numTogetherArrays.length-1;i++){
         //     for( let index in operatorIndices){
@@ -71,7 +110,6 @@ document.querySelector(".equalButton").addEventListener("click", function(){
         // }
         // console.log("Operator indices"+operatorIndices);
         // console.log(numTogetherArrays);
-})
 
 //puts the numbers clicked into a globalVariable to be used later
 /* let numA
