@@ -83,6 +83,12 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 if (oprIndex+1==numArray.length){
                     oprIndex-=1;
                 }
+                else if (oprIndex==numArray.length){
+                    oprIndex-=2;
+                }
+                else if (oprIndex==numArray.length+1){
+                    oprIndex-=3;
+                }
                 let numIndexArray = [oprIndex, oprIndex+1];
                 console.log(numIndexArray);
                 let numToBeCalc = [];
@@ -134,6 +140,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 console.log(accumulator);
             }
         }
+        calcDisplay.textContent = accumulator;
     })
         // let accumulator = 0;
         // for(let i =0;i<numTogetherArrays.length-1;i++){
