@@ -79,6 +79,10 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 // get the index of that item
                 let oprIndex = oprArray.indexOf(bodmasArray[sign]);
                 // the below shows the index of the numArray performing the particular operation
+                // below is done as there is index error when doing
+                if (oprIndex+1==numArray.length){
+                    oprIndex-=1;
+                }
                 let numIndexArray = [oprIndex, oprIndex+1];
                 console.log(numIndexArray);
                 let numToBeCalc = [];
@@ -93,28 +97,28 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 same num is used for 2 diff calc when should only be used for 1
                 .Change the numArray?*/
                 if (bodmasArray[sign] == "x"){
-                    accumulator += numToBeCalc[0] * numToBeCalc[1];
+                    accumulator = numToBeCalc[0] * numToBeCalc[1];
                     console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "÷"){
-                    accumulator += numToBeCalc[0] / numToBeCalc[1];
+                    accumulator = numToBeCalc[0] / numToBeCalc[1];
                     console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "+"){
-                    accumulator += (parseInt(numToBeCalc[0]) + parseInt(numToBeCalc[1]));
+                    console.log("accumulator: "+accumulator);
+                    accumulator = parseInt(numToBeCalc[0]) + parseInt(numToBeCalc[1]);
                     console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "-"){
-                    accumulator += numToBeCalc[0] - numToBeCalc[1];
+                    accumulator = numToBeCalc[0] - numToBeCalc[1];
                     console.log(accumulator);
                 }
                 // change the numArray here
-                for (numOfTimesToChangeArray;numOfTimesToChangeArray<oprArray-1;numOfTimesToChangeArray++){
-                    for (let i in numIndexArray){
-                        // change the value of numArray, there will be 2 spots with the same number
-                        numArray[numIndexArray[i]] = accumulator;
-                        console.log(numArray);
-                    }
+                console.log("numIndexArray: "+ numIndexArray);
+                for (let i in numIndexArray){
+                    // change the value of numArray, there will be 2 spots with the same number
+                    numArray[numIndexArray[i]] = accumulator;
+                    console.log(numArray);
                 }
                 for (let i=0;i<numArray.length-1;i++){
                     console.log("2numbers "+ numArray[i]+" "+numArray[i+1]);
