@@ -18,23 +18,38 @@ let calcDisplay = document.querySelector('.display');
     
     [...document.querySelectorAll('.operatorButtons, .equalButton')].forEach(function(item){item.addEventListener('click', e => 
         {
+            // to populate the numArray and oprArray
             oprArray.push(e.target.value);
             console.log("operator/= button used");
+            // keep this constant
             let finalCalcString = calcDisplay.textContent;
+            // not this
+            let stringToBeAdded = finalCalcString;
             console.log(finalCalcString);
             // find non number's index
             let indexOfOpr = 0;
-            let stringToBeAdded;
             while (indexOfOpr+1 < finalCalcString.length){
+                console.log("final string before finding another operator: "+ finalCalcString);
                 indexOfOpr = finalCalcString.search(/\D/);
+                console.log("the index of the opr after regex finding: "+ indexOfOpr);
+                
+                // if the indexOfOpr is currently at the '=' sign,
                 if (indexOfOpr+1 == finalCalcString.length){
                     console.log("opr+1 = finalcalcstring.length");
                     //if at the last opr then only take what is before the operator
                     stringToBeAdded = finalCalcString.slice(0,-1);
                     console.log(stringToBeAdded);
                     break};
-                finalCalcString = finalCalcString.slice(indexOfOpr+1);
+                // slice finalCalcString after the operator index found 
+                // in this while loop iteration regex so that the next opr can be found
+                // *PROBLEM how to find the subsequent oprs without changing finalCalcString? Still need index from original length
+                // possible solution, find the next opr using stringToBeAdded and then use finalCalcString to get index from the opr String
+                stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
+                console.log("finalCalcString after slicing: "+ finalCalcString);
+                // slice stringToBeAdded so that you remove the >2nd operator
                 stringToBeAdded = finalCalcString.slice(0,-1);
+                console.log("stringToBeAdded after slicing: "+ stringToBeAdded);
+                console.log("index of opr: " + indexOfOpr+" finalCalcString: "+ finalCalcString);
             } 
             console.log(stringToBeAdded);
             numArray.push(stringToBeAdded);
@@ -48,6 +63,7 @@ document.querySelector(".clearButton").addEventListener("click", function(){
 });
 
 document.querySelector(".equalButton").addEventListener("click", function(){
+    // to calculate using numArray and oprArray and display the results
         // equalButton takes the oprArray and numArray and matches them to multiply
         if(oprArray.slice(-1) == "="){
             oprArray.pop();
@@ -72,7 +88,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 }
                 /* *PROBLEM BELOW, due to overlapping numbers for different calcs, 
                 same num is used for 2 diff calc when should only be used for 1
-                have to change  */
+                .Change the numArray?*/
                 if (bodmasArray[sign] == "*"){
                     accumulator += numToBeCalc[0] * numToBeCalc[1];
                     
@@ -86,6 +102,20 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 else if (bodmasArray[sign] == "-"){
                     accumulator += numToBeCalc[0] - numToBeCalc[1];
                 }
+                // change the numArray here
+                for (let i in numIndexArray){
+                    // change the value of numArray, there will be 2 spots with the same number
+                    numArray[numIndexArray[i]] = accumulator;
+                }
+                for (let i in numArray){
+                    if(numArray[i] == numArray[i+1]){
+                        let indexToRemove = i+1;
+                        console.log("Match occurs: "+ numArray[i]);
+                        numArray.splice((i+1),1);
+                        break
+                    }
+                }
+                // remove the second consecutive iteration of that number
                 console.log(accumulator);
             }
         }
