@@ -72,6 +72,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
             console.log(oprArray);
         }
         //TO FOLLOW BODMAS, use the oprArray and find '/' then get that done, and then do the others...
+        let numOfTimesToChangeArray = 0;
         for(let sign in bodmasArray){
             // sign must be in oprArray
             if (oprArray.includes(bodmasArray[sign])){
@@ -100,7 +101,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                     console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "+"){
-                    accumulator += numToBeCalc[0] + numToBeCalc[1];
+                    accumulator += (parseInt(numToBeCalc[0]) + parseInt(numToBeCalc[1]));
                     console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "-"){
@@ -108,11 +109,15 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                     console.log(accumulator);
                 }
                 // change the numArray here
-                for (let i in numIndexArray){
-                    // change the value of numArray, there will be 2 spots with the same number
-                    numArray[numIndexArray[i]] = accumulator;
+                for (numOfTimesToChangeArray;numOfTimesToChangeArray<oprArray-1;numOfTimesToChangeArray++){
+                    for (let i in numIndexArray){
+                        // change the value of numArray, there will be 2 spots with the same number
+                        numArray[numIndexArray[i]] = accumulator;
+                        console.log(numArray);
+                    }
                 }
-                for (let i in numArray){
+                for (let i=0;i<numArray.length-1;i++){
+                    console.log("2numbers "+ numArray[i]+" "+numArray[i+1]);
                     if(numArray[i] == numArray[i+1]){
                         let indexToRemove = i+1;
                         console.log("Match occurs: "+ numArray[i]);
@@ -120,6 +125,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                         break
                     }
                 }
+                console.log(numArray);
                 // remove the second consecutive iteration of that number
                 console.log(accumulator);
             }
