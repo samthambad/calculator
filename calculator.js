@@ -29,38 +29,40 @@ let calcDisplay = document.querySelector('.display');
             // find non number's index
             let indexOfOpr = 0;
             while (indexOfOpr+1 < finalCalcString.length){
-                console.log("final string before finding another operator: "+ finalCalcString);
-                indexOfOpr = finalCalcString.search(/\D/);
+                console.log("finalCalcString: "+ finalCalcString);
+                // find the subsequent opr using stringToBeAdded which changes
+                indexOfOpr = stringToBeAdded.search(/\D/);
+                let opr = stringToBeAdded.substring(indexOfOpr,indexOfOpr+1);
+                console.log("stringToBeAdded:"+ stringToBeAdded);
+                console.log("opr: "+ opr);
+                indexOfOpr = finalCalcString.indexOf(opr);
                 console.log("the index of the opr after regex finding: "+ indexOfOpr);
                 
                 // if the indexOfOpr is currently at the '=' sign,
                 if (indexOfOpr+1 == finalCalcString.length){
                     console.log("opr+1 = finalcalcstring.length");
                     //if at the last opr then only take what is before the operator
-                    stringToBeAdded = finalCalcString.slice(0,-1);
+                    stringToBeAdded = stringToBeAdded.slice(0,-1);
                     console.log(stringToBeAdded);
                     break};
-                // slice finalCalcString after the operator index found 
-                // in this while loop iteration regex so that the next opr can be found
-                // *PROBLEM how to find the subsequent oprs without changing finalCalcString? Still need index from original length
-                // possible solution, find the next opr using stringToBeAdded and then use finalCalcString to get index from the opr String
-                stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
-                console.log("finalCalcString after slicing: "+ finalCalcString);
-                // slice stringToBeAdded so that you remove the >2nd operator
-                stringToBeAdded = finalCalcString.slice(0,-1);
-                console.log("stringToBeAdded after slicing: "+ stringToBeAdded);
-                console.log("index of opr: " + indexOfOpr+" finalCalcString: "+ finalCalcString);
-            } 
-            console.log(stringToBeAdded);
-            numArray.push(stringToBeAdded);
-            console.log(numArray);
-            console.log(oprArray);
+                    // slice finalCalcString after the operator index found 
+                    // in this while loop iteration regex so that the next opr can be found
+                    // *PROBLEM how to find the subsequent oprs without changing finalCalcString? Still need index from original length
+                    // possible solution, find the next opr using stringToBeAdded and then use finalCalcString to get index from the opr String
+                    stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
+                    console.log("stringToBeAdded after slicing: "+ stringToBeAdded);
+                    // slice stringToBeAdded so that you remove the >2nd operator
+                } 
+                console.log(stringToBeAdded);
+                numArray.push(stringToBeAdded);
+                console.log(numArray);
+                console.log(oprArray);
         })});
-    
-document.querySelector(".clearButton").addEventListener("click", function(){
-    numArray = []
-    calcDisplay.textContent = numArray.join("");
-});
+        
+        document.querySelector(".clearButton").addEventListener("click", function(){
+            numArray = []
+            calcDisplay.textContent = numArray.join("");
+        });
 
 document.querySelector(".equalButton").addEventListener("click", function(){
     // to calculate using numArray and oprArray and display the results
