@@ -47,8 +47,6 @@ let calcDisplay = document.querySelector('.display');
                     break};
                     // slice finalCalcString after the operator index found 
                     // in this while loop iteration regex so that the next opr can be found
-                    // *PROBLEM how to find the subsequent oprs without changing finalCalcString? Still need index from original length
-                    // possible solution, find the next opr using stringToBeAdded and then use finalCalcString to get index from the opr String
                     stringToBeAdded = finalCalcString.slice(indexOfOpr+1);
                     console.log("stringToBeAdded after slicing: "+ stringToBeAdded);
                     // slice stringToBeAdded so that you remove the >2nd operator
@@ -79,16 +77,19 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                 // get the index of that item
                 let oprIndex = oprArray.indexOf(bodmasArray[sign]);
                 // the below shows the index of the numArray performing the particular operation
-                // below is done as there is index error when doing
-                if (oprIndex+1==numArray.length){
-                    oprIndex-=1;
+                let diff = numArray.length-oprIndex;
+                if (oprIndex==(numArray.length+diff)){
+                    oprIndex-=(diff+2);
                 }
-                else if (oprIndex==numArray.length){
-                    oprIndex-=2;
-                }
-                else if (oprIndex==numArray.length+1){
-                    oprIndex-=3;
-                }
+                // if (oprIndex+1==numArray.length){
+                //     oprIndex-=1;
+                // }
+                // else if (oprIndex==numArray.length){
+                //     oprIndex-=2;
+                // }
+                // else if (oprIndex==numArray.length+1){
+                //     oprIndex-=3;
+                // }
                 let numIndexArray = [oprIndex, oprIndex+1];
                 console.log(numIndexArray);
                 let numToBeCalc = [];
@@ -136,7 +137,6 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                     }
                 }
                 console.log(numArray);
-                // remove the second consecutive iteration of that number
                 console.log(accumulator);
             }
         }
