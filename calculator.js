@@ -77,7 +77,7 @@ document.querySelector(".equalButton").addEventListener("click", function(){
             if (oprArray.includes(bodmasArray[sign])){
                 // get the index of that item
                 let oprIndex = oprArray.indexOf(bodmasArray[sign]);
-                // apply this opr on index = oprIndex*2 and oprIndex*2+1
+                // the below shows the index of the numArray performing the particular operation
                 let numIndexArray = [oprIndex, oprIndex+1];
                 console.log(numIndexArray);
                 let numToBeCalc = [];
@@ -86,23 +86,26 @@ document.querySelector(".equalButton").addEventListener("click", function(){
                     // carry out the calc here
                     numToBeCalc.push(numArray[numIndexArray[index]]);
                     console.log("numtobecalc: "+numToBeCalc);
-                    console.log("sign: "+sign);
+                    console.log("sign: "+bodmasArray[sign]);
                 }
                 /* *PROBLEM BELOW, due to overlapping numbers for different calcs, 
                 same num is used for 2 diff calc when should only be used for 1
                 .Change the numArray?*/
-                if (bodmasArray[sign] == "*"){
+                if (bodmasArray[sign] == "x"){
                     accumulator += numToBeCalc[0] * numToBeCalc[1];
-                    
+                    console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "÷"){
                     accumulator += numToBeCalc[0] / numToBeCalc[1];
+                    console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "+"){
                     accumulator += numToBeCalc[0] + numToBeCalc[1];
+                    console.log(accumulator);
                 }
                 else if (bodmasArray[sign] == "-"){
                     accumulator += numToBeCalc[0] - numToBeCalc[1];
+                    console.log(accumulator);
                 }
                 // change the numArray here
                 for (let i in numIndexArray){
