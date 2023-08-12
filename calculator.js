@@ -49,7 +49,7 @@ let calcDisplay = document.querySelector('.display');
                     // in this while loop iteration regex so that the next opr can be found
                     // *PROBLEM how to find the subsequent oprs without changing finalCalcString? Still need index from original length
                     // possible solution, find the next opr using stringToBeAdded and then use finalCalcString to get index from the opr String
-                    stringToBeAdded = stringToBeAdded.slice(indexOfOpr+1);
+                    stringToBeAdded = finalCalcString.slice(indexOfOpr+1);
                     console.log("stringToBeAdded after slicing: "+ stringToBeAdded);
                     // slice stringToBeAdded so that you remove the >2nd operator
                 } 
